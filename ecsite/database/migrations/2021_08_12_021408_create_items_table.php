@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 100);    // 商品名
-            $table->integer('amount');      //
+            $table->integer('amount');      // 商品の金額
             $table->timestamps();
         });
     }

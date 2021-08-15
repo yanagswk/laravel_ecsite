@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * 商品モデル
  *
- * id       : 商品id
+ * id       : 商品id (外部キー)
  * name     : 商品名
  * amount   : 量
  */
@@ -22,7 +22,7 @@ class Item extends Model
      */
     public function cart_items()
     {
-        return $this->belongsTo(CartItem::class, 'id', 'id');
+        return $this->belongsTo(CartItem::class, 'id', 'item_id');
     }
 
 }

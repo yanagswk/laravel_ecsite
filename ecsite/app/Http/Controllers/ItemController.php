@@ -40,8 +40,27 @@ class ItemController extends Controller
      * @method get
      * @param App\Item $item
      */
+    // public function show(Item $item, $item_id)
     public function show(Item $item)
     {
         return view('item/show', ['item'=>$item]);
     }
+
+
+    /**
+     * 商品更新処理
+     *
+     * @method post
+     * @param
+     */
+    public function update(Request $request, $item_id)
+    {
+        $item = Item::find($item_id);
+        $item->name = $request->item_name;
+        $item->amount = $request->item_amount;
+        $item->save();
+
+        return redirect('/')->with('flash_message', '更新しました。');
+    }
+
 }

@@ -10,10 +10,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // 商品一覧表示
-Route::get('/', 'ItemController@index');
+Route::get('/', 'ItemController@index')->name('index');
 
 // 商品詳細表示
 Route::get('/item/{item}', 'ItemController@show');
+
+// 商品更新処理
+Route::post('/item/{item_id}/update', 'ItemController@update');
 
 // 商品をカートに追加
 Route::post('/cartitem', 'CartItemController@store');

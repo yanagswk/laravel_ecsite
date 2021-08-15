@@ -25,7 +25,7 @@ class CartItem extends Model
     public function items()
     {
         // return $this->hasMany(Item::class, 'id', 'id');
-        return $this->hasOne(Item::class, 'id', 'id');
+        return $this->hasOne(Item::class, 'id', 'item_id');
     }
 
 
