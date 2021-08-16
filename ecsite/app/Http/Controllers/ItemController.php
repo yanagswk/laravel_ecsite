@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Constants\Consts;
 
@@ -44,7 +45,10 @@ class ItemController extends Controller
     // public function show(Item $item, $item_id)
     public function show(Item $item)
     {
-        return view('item/show', ['item'=>$item]);
+        // 商品に対するコメント取得
+        $comments = $item->comments()->get();
+
+        return view('item/show', ['item'=>$item, 'comments'=>$comments]);
     }
 
 

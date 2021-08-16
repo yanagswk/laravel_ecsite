@@ -11,7 +11,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-
                     {{-- 商品名､金額変更処理 --}}
                     <form action="{{ $item->id }}/update" method="post">
                         @csrf
@@ -26,9 +25,27 @@
                             <button>更新</button>
                         </div>
                     </form>
-
                 </div>
             </div>
+
+            {{-- コメント表示 --}}
+            <div class="col-md-8" style="margin-top: 50px">
+                <div class="card">
+                    <div class="card-header">
+                        コメント
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        @forelse ($comments as $comment)
+                            <li class="list-group-item">
+                                {{ $comment->body." ユーザー名 : ". App\User::find($comment->user_id)->name}}
+                            </li>
+                        @empty
+                            <li class="list-group-item">コメントがありません</li>
+                        @endforelse
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

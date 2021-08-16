@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CartItem extends Model
 {
+    // protected $table = 'cart_items';
+    protected $table = 'new_cart_items';
+
     // 登録可能なカラム指定
     protected $fillable = ['user_id', 'item_id', 'quantity'];
 

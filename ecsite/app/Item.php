@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * id       : 商品id (外部キー)
  * name     : 商品名
- * amount   : 量
+ * amount   : 金額
  */
 class Item extends Model
 {
-    protected $fillable = ['name', 'amount'];
+    // protected $table = 'items';
+    protected $table = 'new_items';
 
+    protected $fillable = ['name', 'amount'];
 
     /**
      * CartItemモデルとのリレーション
@@ -25,4 +27,13 @@ class Item extends Model
         return $this->belongsTo(CartItem::class, 'id', 'item_id');
     }
 
+
+    /**
+     * Commentモデルとのリレーション
+     * 1(Item) 対 多(Comment)
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'item_id', 'id');
+    }
 }
