@@ -48,10 +48,6 @@ class CartItemController extends Controller
 
         // カート内の商品データを読み込む
         $cartitems = CartItem::where('user_id', Auth::id())->get();
-        // foreach ($carts as $cart) {
-        //     $test = $cart->items->name;
-        //     dd($test);
-        // }
 
         $subtotal = 0;
         // カート内の商品の合計を計算

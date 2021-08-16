@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use Illuminate\Support\Facades\Auth;
+use App\Constants\Consts;
 
 class ItemController extends Controller
 {
@@ -56,11 +57,28 @@ class ItemController extends Controller
     public function update(Request $request, $item_id)
     {
         $item = Item::find($item_id);
+
+        $update_message = Consts::UPDATE_MSG;
+
+        // 商品名が変更されてるか
+        if (!strcmp($item->name, $request->item_name) == 0) {
+            $update_message .= "「{$request->item_name}」";
+        }
+
+        // 金額が変更されてるか
+        if ($item->amount !== (int) $request->item_amount) {
+            $update_message .= "「{$request->item_amount}円」";
+        }
+
+        // 何も変更がない場合
+        if ($update_message === Consts::UPDATE_MSG) {
+            return redirect("/item/{$item_id}")
+                ->with('flash_message', '更新されていません');
+        }
+
         $item->name = $request->item_name;
-        $item->amount = $request->item_amount;
+        $item->amount = (int) $request->item_amount;
         $item->save();
-
-        return redirect('/')->with('flash_message', '更新しました。');
+        return redirect('/')->with('flash_message', $update_message);
     }
-
 }
